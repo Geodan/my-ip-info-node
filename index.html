@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ik</title>
+    <script src="./client.min.js"></script>
+    <script>
+    
+    function fetchWhoIs(whoisIp) {
+        fetch(`./whois/${whoisIp}`).then(result=>{
+            if (result.ok) {
+                result.json().then(json=>{
+                    document.querySelector('#whois').innerHTML = `<b>network</b>: ${json.inetnum}<br><b>netname</b>: ${json.netname}<br><b>description</b>: ${json.descr}<br><b>country</b>: ${json.country}<br>`
+                })
+            }
+        })
+    }
+    </script>
+
+</head>
+<body>
+    <h1>ip: {ip}</h1>
+    <div id="whois"></div>
+    <p></p>
+    <script>
+        fetchWhoIs("{ip}");
+        const client = new ClientJS();
+        document.write(`<b>Browser</b>: ${client.getBrowser()}, version: ${client.getBrowserVersion()}, engine: ${client.getEngine()}, version: ${client.getBrowserVersion()}<br>`)
+        document.write(`<b>Language</b>: ${client.getLanguage()}<br>`)
+        document.write(`<b>OS</b>: ${client.getOS()} ${client.getOSVersion()}<br>`)
+        document.write(`<b>CPU</b>: ${client.getCPU()}<br>`)
+        document.write(`<b>Resolution</b>: ${client.getCurrentResolution()} color: ${client.getColorDepth()} bits<br>`)
+        document.write(`<b>Mobile device</b>: ${client.isMobile()}<br>`)
+        document.write(`<b>Fingerprint</b>: ${client.getFingerprint()}<br>`)
+        document.write(`<b>Time Zone</b>: ${client.getTimeZone()}<br>`)
+    </script>
+</body>
+</html>
