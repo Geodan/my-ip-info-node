@@ -1,6 +1,6 @@
 ## WhatIsMyIp and WhoIs information
 
-Simple web-service that returns a web page showing the client ip, client whois network information and some browser information.
+Simple web-service that returns a web page showing the client ip, client whois and geoip network information and some basic browser information.
 
 ### Prerequisites
 * git
@@ -15,7 +15,7 @@ Simple web-service that returns a web page showing the client ip, client whois n
 
 
 ### Usage
-Visit http://server.example.org:3002 in your browser
+Visit http://your.hostname.or.address:3002 in your browser
 
 
 
