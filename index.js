@@ -3,7 +3,8 @@ const app = express()
 const port = 3002
 const fs = require('fs')
 const get_ip = require('ipware')().get_ip;
-const whoisjson = require('whois-json')
+const whoisjson = require('whois-json');
+const fetch = require('node-fetch');
 
 app.use(express.static('public'));
 
@@ -17,6 +18,18 @@ app.get('/', (req, res) => {
 app.get('/whois/:ip', (req, res) => {
     whoisjson(req.params.ip).then(results=>{
         res.json(results);
+    })
+})
+
+app.get('/ipapi/:ip', (req, res)=> {
+    fetch(`http://ip-api.com/json/${req.params.ip}`).then(result=>{
+        if (result.ok) {
+            result.json().then(json=>{
+                res.json(json);
+            })
+        } else {
+            res.json({error: result.statusText? result.statusText : result.status})
+        }
     })
 })
 

@@ -17,6 +17,17 @@
             }
         })
     }
+    function fetchIpApi() {
+        fetch("./ipapi/{ip}").then(result=>{
+            if (result.ok) {
+                result.json().then(json=>{
+                    if (json.status === "success") {
+                        document.querySelector('#ipapi').innerHTML = `<b>Location</b>: ${json.zip}, ${json.city}, ${json.regionName}, ${json.country}, Lat: ${json.lat}, Lon: ${json.lon}<br><b>Extra ip info</b> for: ${json.query}, as: ${json.as}, isp: ${json.isp}`
+                    }
+                })
+            }
+        })
+    }
     </script>
 
 </head>
@@ -24,8 +35,11 @@
     <h1>ip: {ip}</h1>
     <div id="whois"></div>
     <p></p>
+    <div id="ipapi"></div>
+    <p></p>
     <script>
         fetchWhoIs("{ip}");
+        fetchIpApi();
         const client = new ClientJS();
         document.write(`<b>Browser</b>: ${client.getBrowser()}, version: ${client.getBrowserVersion()}, engine: ${client.getEngine()}, version: ${client.getBrowserVersion()}<br>`)
         document.write(`<b>Language</b>: ${client.getLanguage()}<br>`)
